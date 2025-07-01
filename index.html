@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Nor Aves</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body>
+  <nav class="menu">
+    <h2>Nor Aves</h2>
+    <ul>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="pedidos.html">Pedidos</a></li>
+      <li><a href="bloques.html">Bloques</a></li>
+      <li><a href="guias.html">Guías</a></li>
+      <li><a href="reporte.html">Reportes</a></li>
+    </ul>
+  </nav>
+
+  <div class="contenido">
+    <h1>Panel de Control</h1>
+    <div class="dashboard">
+      <div class="card">
+        <h3>Pedidos</h3>
+        <p id="totalPedidos">0</p>
+        <a href="pedidos.html" class="boton">Ver</a>
+      </div>
+      <div class="card">
+        <h3>Bloques</h3>
+        <p id="totalBloques">0</p>
+        <a href="bloques.html" class="boton">Ver</a>
+      </div>
+      <div class="card">
+        <h3>Guías</h3>
+        <p id="totalGuias">0</p>
+        <a href="guias.html" class="boton">Ver</a>
+      </div>
+    </div>
+
+    <h2>Guías generadas por día</h2>
+    <canvas id="graficoGuias" width="600" height="300"></canvas>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/db.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Estadísticas rápidas
+    document.getElementById('totalPedidos').textContent = STORAGE.pedidos.length;
+    document.getElementById('totalBloques').textContent = STORAGE.bloques.length;
+    document.getElementById('totalGuias').textContent = STORAGE.guias.length;
+
+    // Gráfico de guías por día
+    const guias = STORAGE.guias;
+    const agrupado = {};
+    guias.forEach(g => {
+      const fecha = new Date(g.fecha).toLocaleDateString();
+      agrupado[fecha] = (agrupado[fecha] || 0) + 1;
+    });
+    const fechas = Object.keys(agrupado);
+    const cantidades = Object.values(agrupado);
+    new Chart(document.getElementById('graficoGuias'), {
+      type: 'line',
+      data: {
+        labels: fechas,
+        datasets: [{
+          label: 'Guías por día',
+          data: cantidades,
+          borderColor: '#2d572c',
+          backgroundColor: '#9cc69b',
+          fill: true,
+          tension: 0.3,
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Tendencia de Guías Despachadas'
+          }
+        },
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            precision: 0
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

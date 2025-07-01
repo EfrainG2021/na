@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bloques de Pesaje</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body>
+  <nav class="menu">
+    <h2>Nor Aves</h2>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="pedidos.html">Pedidos</a></li>
+      <li><a href="bloques.html">Bloques</a></li>
+      <li><a href="guias.html">Guías</a></li>
+      <li><a href="reporte.html">Reportes</a></li>
+    </ul>
+  </nav>
+  <div class="contenido">
+    <h2>Registrar Bloque de Pesaje</h2>
+    <form id="form-bloque">
+      <label for="bpPedidoId">Pedido ID:</label><input type="text" id="bpPedidoId" required>
+      <label for="bpCantidad">Cant. Bandejas:</label><input type="number" id="bpCantidad" required>
+      <label for="bpPeso">Peso Total (kg):</label><input type="number" id="bpPeso" step="0.01" required>
+      <label for="bpObs">Observaciones:</label><textarea id="bpObs" required></textarea>
+      <button type="submit">Registrar Bloque</button>
+    </form>
+    <div id="lista-bloques"></div>
+  </div>
+  <script src="assets/js/db.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/bloques.js"></script>
+</body>
+</html>

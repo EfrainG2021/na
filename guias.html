@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Guías de Despacho</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body>
+  <nav class="menu">
+    <h2>Nor Aves</h2>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="pedidos.html">Pedidos</a></li>
+      <li><a href="bloques.html">Bloques</a></li>
+      <li><a href="guias.html">Guías</a></li>
+      <li><a href="reporte.html">Reportes</a></li>
+    </ul>
+  </nav>
+  <div class="contenido">
+    <h2>Generar Guía de Despacho</h2>
+    <form id="form-guia">
+      <label for="gPedidoId">Pedido ID:</label><input type="text" id="gPedidoId" required>
+      <label for="gVehiculo">Vehículo:</label><input type="text" id="gVehiculo" required>
+      <label for="gConductor">Conductor:</label><input type="text" id="gConductor" required>
+      <button type="submit">Generar Guía</button>
+    </form>
+    <div id="lista-guias"></div>
+  </div>
+  <script src="assets/js/db.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/guias.js"></script>
+</body>
+</html>
